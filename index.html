@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Area of a Rectangle</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>Area of a Rectangle</h1>
+            <div class="row">
+                <div>
+                    <label for="l">Length</label>
+                    <input type="text" id="l" name="l">
+                </div>
+                <div>
+                    <label for="w">Width</label>
+                    <input type="text" id="w" name="w">
+                </div>
+            </div>
+            <button id="solve">Calculate</button>
+            <button id="clear">Clear</button>
+            <p class="hidden"></p>
+        </div>
+    </div>
+    <script>
+        const l = document.getElementById('l');
+        const w = document.getElementById('w');
+        const answer = document.querySelector('p');
+        const calculateButton = document.getElementById('solve');
+        const clearButton = document.getElementById('clear');
+
+        function checkIfValid(num) {
+            if (isNaN(num)) {
+                return false;
+            }
+            if (num <= 0) {
+                return false;
+            }
+            return true;
+        };
+
+        calculateButton.addEventListener('click', function(e) {
+            let length = +l.value;
+            let width = +w.value;
+            let area = "";
+            answer.classList.remove("hidden");
+
+            if (!checkIfValid(length) || !checkIfValid(width)) {
+                answer.textContent = 'Invalid Inputs';
+                return;
+            } else {
+                area = length * width;
+                answer.textContent = `The area of your rectangle is ${area}.`;
+            }
+        });
+
+        clearButton.addEventListener('click', function(e) {
+            l.value = " ";
+            w.value = " ";
+            answer.textContent = "";
+            answer.classList.add("hidden");
+        });
+    </script>
+</body>
+</html>
